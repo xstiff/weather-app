@@ -14,12 +14,14 @@ const TableElement = ({data}: {data: TWeatherData}) => {
             <td>{data.pressure} hPa</td>
             <td>{data.humidity} %</td>
             <td>{data.wind_speed} m/s</td>
-            <td>{data.wind_direction}</td>
-            <td>{data.cloud_coverage}</td>
+            <td>{data.wind_direction} &deg;</td>
+            <td>{data.cloud_coverage} %</td>
             <td>{data.sunrise_time.slice(11, 16)}</td>
             <td>{data.sunset_time.slice(11, 16)}</td>
-            <td>{JSON.stringify(data.rainfall)}</td>
-            <td>{JSON.stringify(data.snowfall)}</td>
+
+            {/* I know that it should be formatted already in store */}
+            <td>{JSON.stringify(data.rainfall).slice(1, -1).replaceAll('"',"").replaceAll(":"," ")} {JSON.stringify(data.rainfall).slice(1, -1).replaceAll('"',"").length > 1 ? ("mm") : ("0h 0 mm")}</td>
+            <td>{JSON.stringify(data.snowfall).slice(1, -1).replaceAll('"',"").replaceAll(":"," ")} {JSON.stringify(data.snowfall).slice(1, -1).replaceAll('"',"").length > 1 ? ("mm") : ("0h 0 mm")}</td>
         </tr>
         </>
     )
