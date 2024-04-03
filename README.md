@@ -1,5 +1,5 @@
-# This is weather app.
+# This is weather dashboard.
 
 
-Frontend: React & Next & Typescript
-Backend: Django & OpenWeatherMap
+Frontend: React & Next & Typescript <br/>
+Backend: Django (Rest Framework) & OpenWeatherMap <br/>

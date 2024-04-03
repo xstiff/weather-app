@@ -1,29 +1,28 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { TWeatherData } from "@/app/store/store";
 
-"https://api.openweathermap.org/geo/1.0/direct?q=Warszawa&limit=2&appid=6611cca35400d73a09f389df35033cda"
+class OpenWeatherAPI {
+    private url: string = "http://localhost:8000/api/";
 
-
-const url = "http://localhost:8000/weather/{city}/"
-
-export class OpenWeatherAPI {
-    private url: string = "http://localhost:8000/api/"
-    public getDataByCity = async (city: string) => {
+    public async getDataByCity(city: string): Promise<TWeatherData> {
         try {
-            const request = await axios.get(this.url + `weather/${city}/`)
-            return request
+            const response: AxiosResponse<TWeatherData> = await axios.get(`${this.url}weather/${city}/`);
+            return response.data;
         } catch (error) {
-            console.log("Error! | " + error)
-            return error
+            console.error("Error fetching weather data:", error);
+            throw new Error("Failed to fetch weather data");
         }
     }
 
-    public searchEngine = async (phrase: string) => {
+    public async searchEngine(phrase: string): Promise<any> {
         try {
-            const request = await axios.get(this.url + `search/${phrase}/`)
-            return request
+            const response = await axios.get(`${this.url}search/${phrase}/`);
+            return response.data;
         } catch (error) {
-            console.log("Error! | " + error)
-            return error
+            console.error("Error searching:", error);
+            throw new Error("Search failed");
         }
     }
 }
+
+export const WeatherAPI = new OpenWeatherAPI();

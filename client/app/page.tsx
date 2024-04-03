@@ -1,24 +1,46 @@
 'use client'
-import { OpenWeatherAPI } from "./components/objects/OpenWeatherAPI";
+import { useEffect } from "react";
+import { SearchInput } from "./components/SearchInput/SearchInput";
+import { WeatherAPI } from "./components/objects/OpenWeatherAPI";
+import { TWeatherData, useWeatherStore } from "./store/store";
+import { DataDisplay } from "./components/DataDisplay/DataDisplay";
+import { CurrentLocation } from "./components/CurrentLocation/CurrentLocation";
 
 
 export default function Home() {
-  const Weather = new OpenWeatherAPI();
 
+  const {setData} = useWeatherStore( state => state )
 
-  const getData = async (city: string) => {
-    const response = await Weather.getDataByCity(city)
-    console.log(response)
+  const updateData = async (city: string) => {
+    try {
+      const responseData = await WeatherAPI.getDataByCity(city);
+      const data = responseData as TWeatherData
+      setData(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
+
+  // Getting some samples
+  useEffect(() => {
+    updateData("Warszawa")
+    updateData("Poznań")
+    updateData("Miami")
+    updateData("Gdańsk")
+    updateData("Łódź")
+    updateData("Berlin")
+    updateData("Rzym")
+    updateData("Split")
+    updateData("Zadar")
+    updateData("Wrocław")
+  }, [])
+
 
   return (
     <div>
-      <p>Hello world</p>
-
-      <button onClick={() => getData("Warszawa")}>
-        Click me
-      </button>
-    
+      <SearchInput />
+      <CurrentLocation />
+      <DataDisplay />
     </div>
   );
 }
