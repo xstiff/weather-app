@@ -1,0 +1,14 @@
+# .gitignore
+
+.env
+*/.env
+/server/.env      # Ignoruj plik .env dla backendu Django
+/server/__pycache__/  # Ignoruj katalogi __pycache__ w backendzie Django
+
+/client/node_modules/  # Ignoruj katalog node_modules w frontendzie React & Next
+/client/.next/         # Ignoruj katalog .next w frontendzie Next
+/client/.env           # Jeśli używasz pliku .env również w frontendzie, możesz dodać go tutaj
+
+
+*.pyc          # Ignoruj pliki skompilowane Pythona w całym repozytorium
+.DS_Store      # Ignoruj pliki DS_Store, które mogą być generowane na systemach MacOS
