@@ -1,46 +1,40 @@
-'use client'
+"use client";
 import { useEffect } from "react";
-import { SearchInput } from "./components/SearchInput/SearchInput";
-import { WeatherAPI } from "./components/objects/OpenWeatherAPI";
-import { TWeatherData, useWeatherStore } from "./store/store";
-import { DataDisplay } from "./components/DataDisplay/DataDisplay";
-import { CurrentLocation } from "./components/CurrentLocation/CurrentLocation";
-
+import { SearchInput } from "./components/ReactComponents/SearchInput/SearchInput";
+import { DataDisplay } from "./components/ReactComponents/DataDisplay/DataDisplay";
+import { CurrentLocation } from "./components/ReactComponents/CurrentLocation/CurrentLocation";
+import { useWeatherUpdater } from "./components/Hooks/WeatherHook";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
+  const useWeather = useWeatherUpdater();
 
-  const {setData} = useWeatherStore( state => state )
-
-  const updateData = async (city: string) => {
-    try {
-      const responseData = await WeatherAPI.getDataByCity(city);
-      const data = responseData as TWeatherData
-      setData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
-  // Getting some samples
+  // Getting some sample data
   useEffect(() => {
-    updateData("Warszawa")
-    updateData("Poznań")
-    updateData("Miami")
-    updateData("Gdańsk")
-    updateData("Łódź")
-    updateData("Berlin")
-    updateData("Rzym")
-    updateData("Split")
-    updateData("Zadar")
-    updateData("Wrocław")
-  }, [])
+    const SampleData = () => {
+      useWeather("Warszawa");
+      useWeather("Poznań");
+      useWeather("Miami");
+      useWeather("Gdańsk");
+      useWeather("Łódź");
+      useWeather("Berlin");
+      useWeather("Rzym");
+      useWeather("Split");
+      useWeather("Zadar");
+      useWeather("Wrocław");
+    };
 
+    SampleData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
       <SearchInput />
       <CurrentLocation />
       <DataDisplay />
+      <ToastContainer />
     </div>
   );
 }

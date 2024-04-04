@@ -32,7 +32,7 @@ class WeatherData:
 
     def get_query_results(self, query):
         try:
-           self.query_results = [{"location": x.name, "lon": x.lon, "lat:": x.lat} for x in self.geo.geocode(query, limit=10)]
+           self.query_results = [{"location": x.name, "lon": x.lon, "lat": x.lat} for x in self.geo.geocode(query, limit=10)]
 
         except Exception as e:
             self.status_weather = None
