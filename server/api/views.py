@@ -6,11 +6,10 @@ from dotenv import dotenv_values
 
 
 config = dotenv_values()
-
+weather = WeatherData(config['API_KEY'])
 
 @api_view(['GET'])
 def weather_api_view(request, city):
-    weather = WeatherData(config['API_KEY'])
     weather.get_weather_data(city)
     
     if not weather.status_weather:
@@ -32,6 +31,30 @@ def weather_api_view(request, city):
         'snowfall': weather.snowfall,
     }
     return Response(data)
+
+
+
+@api_view(['GET'])
+def weather_serach_view(request, query):
+    weather.get_query_results(query)
+
+    old_data = {
+        "query": weather.query_results,
+    }
+
+    unique_locations = []
+    existing_locations = set()
+
+
+    # Not the best idea but for some reason API doesnt return countries
+    for item in old_data["query"]:
+        location = item["location"]
+        if location not in existing_locations:
+            unique_locations.append(item)
+            existing_locations.add(location)
+
+    return Response(unique_locations)
+
 
 @api_view(['GET'])
 def usage_view(request):
