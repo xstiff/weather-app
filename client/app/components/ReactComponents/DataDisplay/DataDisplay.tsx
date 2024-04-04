@@ -1,78 +1,103 @@
-import { TWeatherData } from "../../Types/Types";
+import TableElement from "./TableElement";
 import "./DataDisplay.scss";
 import { useWeatherStore } from "@/app/store/store";
+import { SortHandler } from "./SortHandler";
 
-const TableElement = ({ data }: { data: TWeatherData }) => {
-  return (
-    <>
-      <tr>
-        <td>{data.city}</td>
-        <td>{data.status_weather}</td>
-        <td>{data.min_temperature} &deg;C</td>
-        <td>{data.max_temperature} &deg;C</td>
-        <td>{data.pressure} hPa</td>
-        <td>{data.humidity} %</td>
-        <td>{data.wind_speed} m/s</td>
-        <td>{data.wind_direction} &deg;</td>
-        <td>{data.cloud_coverage} %</td>
-        <td>{data.sunrise_time.slice(11, 16)}</td>
-        <td>{data.sunset_time.slice(11, 16)}</td>
-
-        {/* I know that it should be formatted already in store */}
-        <td>
-          {JSON.stringify(data.rainfall)
-            .slice(1, -1)
-            .replaceAll('"', "")
-            .replaceAll(":", " ")}{" "}
-          {JSON.stringify(data.rainfall).slice(1, -1).replaceAll('"', "")
-            .length > 1
-            ? "mm"
-            : "0h 0 mm"}
-        </td>
-        <td>
-          {JSON.stringify(data.snowfall)
-            .slice(1, -1)
-            .replaceAll('"', "")
-            .replaceAll(":", " ")}{" "}
-          {JSON.stringify(data.snowfall).slice(1, -1).replaceAll('"', "")
-            .length > 1
-            ? "mm"
-            : "0h 0 mm"}
-        </td>
-      </tr>
-    </>
+export const DataDisplay: React.FC = () => {
+  const { prevDataFiltered, setPrevDataFiltered } = useWeatherStore(
+    (state) => state
   );
-};
-
-export const DataDisplay = () => {
-  const { data, prevData } = useWeatherStore.getState();
 
   return (
     <div className="DataDisplay-Container">
-      <h1>Previous searches</h1>
       <table>
         <thead>
           <tr>
-            <th>City</th>
-            <th>Status Weather</th>
-            <th>Min Temperature</th>
-            <th>Max Temperature</th>
-            <th>Pressure</th>
-            <th>Humidity</th>
-            <th>Wind Speed</th>
-            <th>Wind Direction</th>
-            <th>Cloud Coverage</th>
-            <th>Sunrise Time</th>
-            <th>Sunset Time</th>
-            <th>Rainfall</th>
-            <th>Snowfall</th>
+            <th
+              onClick={() => {
+                SortHandler(0, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              City
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(1, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Status Weather
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(2, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Min Temperature
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(3, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Max Temperature
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(4, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Pressure
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(5, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Humidity
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(6, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Wind Speed
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(7, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Wind Direction
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(8, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Cloud Coverage
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(9, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Sunrise Time
+            </th>
+            <th
+              onClick={() => {
+                SortHandler(10, prevDataFiltered, setPrevDataFiltered);
+              }}
+            >
+              Sunset Time
+            </th>
+            <th data-type="Rainfall">Rainfall</th>
+            <th data-type="Snowfall">Snowfall</th>
           </tr>
         </thead>
         <tbody>
-          {prevData.length > 1 &&
-            prevData
-              .slice(1)
-              .map((el, idx) => <TableElement key={idx} data={el} />)}
+          {prevDataFiltered.map((el, idx) => (
+            <TableElement key={idx} data={el} />
+          ))}
         </tbody>
       </table>
     </div>

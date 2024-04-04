@@ -21,5 +21,20 @@
       border: 1px solid black;
       text-align: center;
     }
+
+    th {
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(83, 83, 83);
+        color: #ffffff;
+      }
+    }
+
+    th[data-type="Rainfall"]:hover,
+    th[data-type="Snowfall"]:hover {
+      background-color: transparent;
+      color: inherit;
+      cursor: text;
+    }
   }
 }

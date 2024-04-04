@@ -4,7 +4,9 @@ import { TWeatherData } from "../components/Types/Types";
 type WeatherStore = {
   data: TWeatherData;
   prevData: TWeatherData[];
+  prevDataFiltered: TWeatherData[];
   setData: (prop: TWeatherData) => void;
+  setPrevDataFiltered: (prop: TWeatherData[]) => void;
 };
 
 const EmptyWeatherData = {
@@ -29,6 +31,10 @@ const EmptyWeatherData = {
 export const useWeatherStore = create<WeatherStore>((set) => ({
   data: EmptyWeatherData,
   prevData: [],
+  prevDataFiltered: [],
+  setPrevDataFiltered: (new_data: TWeatherData[]) => {
+    set({ prevDataFiltered: new_data });
+  },
   setData: (new_data: TWeatherData) => {
     set((state) => {
       const isDuplicateCity = state.prevData.some(
@@ -37,12 +43,14 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
 
       if (!isDuplicateCity) {
         return {
+          prevDaprevDatataFiltered: [...state.prevData, new_data],
           prevData: [...state.prevData, new_data],
           data: new_data,
         };
       }
 
       return {
+        prevDataFiltered: [...state.prevData],
         prevData: [...state.prevData],
         data: new_data,
       };
