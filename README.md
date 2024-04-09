@@ -58,4 +58,14 @@ py manage.py runserver
 
 
 ### Screenshots
-Below are screenshots illustrating the frontend dashboard:
+Below are screenshots:</br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/fe1.png?raw=true" alt="Photo"/></br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/fe%20sort.png?raw=true" alt="Photo"/></br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/fe%20search.png?raw=true" alt="Photo"/></br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/fe%20search%20no%20data.png?raw=true" alt="Photo"/></br>
+
+<hr/>
+
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/ExampleResponse.png" alt="Photo"/></br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/example%20search.png?raw=true" alt="Photo"/></br>
+<img src="https://github.com/xstiff/weather-app/blob/main/photos/server%20response.png?raw=true" alt="Photo"/>
