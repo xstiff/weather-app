@@ -24,7 +24,7 @@ const TableElement: React.FC<TableElementProps> = ({ data }) => {
   );
 };
 
-function formatRainfall(rainfall: Record<string, any>): string {
+const formatRainfall = (rainfall: Record<string, any>): string => {
   const formattedRainfall = JSON.stringify(rainfall)
     .slice(1, -1)
     .replaceAll('"', "")
@@ -32,7 +32,7 @@ function formatRainfall(rainfall: Record<string, any>): string {
   return formattedRainfall.length > 1 ? `${formattedRainfall} mm` : "0h 0 mm";
 }
 
-function formatSnowfall(snowfall: Record<string, any>): string {
+const formatSnowfall = (snowfall: Record<string, any>): string => {
   const formattedSnowfall = JSON.stringify(snowfall)
     .slice(1, -1)
     .replaceAll('"', "")

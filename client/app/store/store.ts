@@ -7,6 +7,8 @@ type WeatherStore = {
   prevDataFiltered: TWeatherData[];
   setData: (prop: TWeatherData) => void;
   setPrevDataFiltered: (prop: TWeatherData[]) => void;
+  sort: number;
+  setSort: (sorter: number) => void;
 };
 
 const EmptyWeatherData = {
@@ -35,6 +37,13 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
   setPrevDataFiltered: (new_data: TWeatherData[]) => {
     set({ prevDataFiltered: new_data });
   },
+  sort: -1,
+  setSort: (sorter: number) => {
+    set((state) => ({
+      ...state,
+      sort: sorter,
+    }));
+  },  
   setData: (new_data: TWeatherData) => {
     set((state) => {
       const isDuplicateCity = state.prevData.some(
@@ -45,6 +54,7 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
         return {
           prevDaprevDatataFiltered: [...state.prevData, new_data],
           prevData: [...state.prevData, new_data],
+          sort: -1,
           data: new_data,
         };
       }
@@ -53,6 +63,8 @@ export const useWeatherStore = create<WeatherStore>((set) => ({
         prevDataFiltered: [...state.prevData],
         prevData: [...state.prevData],
         data: new_data,
+        sort: -1,
+
       };
     });
   },

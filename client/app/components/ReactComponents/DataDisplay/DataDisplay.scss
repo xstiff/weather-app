@@ -23,10 +23,21 @@
     }
 
     th {
+      font-size: 16px;
       cursor: pointer;
       &:hover {
         background-color: rgb(83, 83, 83);
         color: #ffffff;
+      }
+    }
+    td {
+      font-size: 14px;
+    }
+    th.active {
+      color: rgb(255, 17, 0);
+      &:hover {
+        background-color: rgb(83, 83, 83);
+        color: rgb(255, 164, 164);
       }
     }
 

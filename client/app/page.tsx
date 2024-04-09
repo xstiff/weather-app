@@ -7,6 +7,7 @@ import { useWeatherUpdater } from "./components/Hooks/WeatherHook";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FilteringAndSorting } from "./components/ReactComponents/Filtering/FilteringAndSorting";
+import { SortRemover } from "./components/ReactComponents/SortRemover/SortRemover";
 
 export default function Home() {
   const useWeather = useWeatherUpdater();
@@ -14,7 +15,7 @@ export default function Home() {
   // Getting some sample data
   useEffect(() => {
     const SampleData = () => {
-      toast.success("Retrieving sample data of 10 cities", {
+      toast.success("Retrieving sample data of 10 cities. Please wait.", {
         position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
@@ -34,6 +35,19 @@ export default function Home() {
       useWeather("Split");
       useWeather("Zadar");
       useWeather("Wrocław");
+
+      setTimeout(() => {
+        toast.warn("Search does auto-complete, but it's slow due to API limitations!", {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+        });
+      }, 3000)
     };
 
     SampleData();
@@ -41,7 +55,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="rootDiv">
+      <SortRemover />
       <SearchInput />
       <CurrentLocation />
       <FilteringAndSorting />

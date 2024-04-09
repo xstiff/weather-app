@@ -1,0 +1,26 @@
+.ButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+
+    .SortRemoverButton {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        color:white;
+        background-color: rgba(0, 0, 0,0.9);
+        cursor: pointer;
+        padding: 8px;
+
+        border-radius: 50%;
+    }
+
+    .SortRemoverButton:hover {
+        color:rgb(235, 88, 88);
+    }
+}
