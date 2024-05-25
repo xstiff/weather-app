@@ -1,7 +1,7 @@
 <br />
 <center>
 <hr />
-### To vennie: I already had done exact project you asked for, and that's why last commit was last month :)!<hr /><br /><br /><br />
+>>> To company Vennie: I already had done exact project you asked for, and that's why last commit was last month :)!<hr /><br /><br /><br />
 # Weather dashboard
 
 
