@@ -1,7 +1,7 @@
 <br />
 <center>
 
-
+### To vennie: I already had done exact project you asked for, and that's why last commit was last month :)!<br /><br /><br />
 # Weather dashboard
 
 
